@@ -11,11 +11,12 @@ build:
 	go build -v -o ./bin/gowasm ./cmd/server/main.go 
 
 genenv:
+	@echo "--------------------"
+	@echo "Copying wasm_exec.js"
+	@echo "--------------------"
 	cp "$$(go env GOROOT)/misc/wasm/wasm_exec.js" ./assets
 
-runbin:
+runbin: genenv buildwasm  build
 	./bin/gowasm
 
-buildall: buildwasm  build
-	
 .PHONY: 

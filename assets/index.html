@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello WebAssembly GoLang</title>
+    <meta charset="utf-8" />
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(
+        fetch("gowasm.wasm"),
+        go.importObject
+      ).then((result) => {
+        go.run(result.instance);
+      });
+    </script>
   </head>
 
-  <body>
-    <h1>Hello WebAssembly</h1>
-    <button id="get-html">Get HTML</button>
-    <script src="wasm_exec.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <body></body>
 </html>
